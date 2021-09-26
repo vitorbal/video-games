@@ -11,8 +11,8 @@ export default function Home() {
 
       <div className="flex flex-col items-center justify-center h-screen">
         <main>
-          <h1 className="text-center text-5xl">Games! Games! Games!</h1>
-          <div style={{ width: "800px" }}>
+          <h1 className="text-center text-5xl">Console Wars!</h1>
+          <div className="w-screen">
             <GameSalesGraph />
           </div>
         </main>
