@@ -112,7 +112,9 @@ export default function GameSales() {
           <option value="2010">10&apos;s</option>
         </select>
       </label>
-      <SalesChart startYear={startYear} />
+      <div>
+        <SalesChart startYear={startYear} />
+      </div>
     </>
   );
 }
