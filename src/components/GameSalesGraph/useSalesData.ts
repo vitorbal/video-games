@@ -1,11 +1,4 @@
 import { useQuery } from "react-query";
-import {
-  VictoryChart,
-  VictoryStack,
-  VictoryAxis,
-  VictoryBar,
-  VictoryTooltip,
-} from "victory";
 import groupBy from "lodash/groupBy";
 
 type VideoGame = {
@@ -22,17 +15,7 @@ type SalesData = {
   [year: number]: VideoGame[];
 };
 
-async function getGameSales() {
-  const response = await fetch(`/api/sales-per-year`);
-
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
-  }
-
-  return response.json();
-}
-
-function prepareData(salesData: SalesData, { startYear, endYear }) {
+function prepareData(salesData: SalesData = {}, { startYear, endYear }) {
   const platformToCompany = {
     Wii: "Nintendo",
     NES: "Nintendo",
@@ -61,8 +44,9 @@ function prepareData(salesData: SalesData, { startYear, endYear }) {
 
   for (let year = startYear; year <= endYear; year++) {
     years.push(year);
+
     // Calculate sales per company and total sales
-    const salesBreakdown = salesData[year].reduce((prev, curr) => {
+    const salesBreakdown = (salesData[year] || []).reduce((prev, curr) => {
       const company = platformToCompany[curr.Platform];
       // Ignore platforms we didn't map out
       if (!company) {
@@ -95,57 +79,24 @@ function prepareData(salesData: SalesData, { startYear, endYear }) {
   };
 }
 
-export default function SalesViz() {
-  const startYear = 1999;
-  const endYear = 2010;
+async function getGameSales() {
+  const response = await fetch(`/api/sales-per-year`);
 
-  const { isLoading, isError, data, error } = useQuery<
-    { items: SalesData },
-    Error
-  >("game-sales", getGameSales);
-
-  if (isLoading) {
-    return <span>Loading...</span>;
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
   }
 
-  if (isError) {
-    return <span>Error: {error.message}</span>;
-  }
+  return response.json();
+}
 
-  const { dataset, years } = prepareData(data, { startYear, endYear });
-
-  return (
-    <VictoryChart
-      height={600}
-      width={years.length * 100}
-      domainPadding={{ x: 30, y: 20 }}
-    >
-      <VictoryStack
-        colorScale={[
-          // Nintendo
-          "Red",
-          // Microsoft
-          "Green",
-          // Sony
-          "Blue",
-          // Sega
-          "Orange",
-          // PC
-          "Black",
-        ]}
-      >
-        {dataset.map((data, i) => {
-          return (
-            <VictoryBar
-              data={data}
-              key={i}
-              labelComponent={<VictoryTooltip />}
-            />
-          );
-        })}
-      </VictoryStack>
-      <VictoryAxis dependentAxis tickFormat={(tick) => `${tick}%`} />
-      <VictoryAxis tickFormat={years} />
-    </VictoryChart>
+export default function useSalesData({ startYear, endYear }) {
+  const result = useQuery<{ items: SalesData }, Error>(
+    "game-sales",
+    getGameSales
   );
+
+  return {
+    ...result,
+    data: prepareData(result.data, { startYear, endYear }),
+  };
 }
