@@ -1,7 +1,13 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import "../styles/globals.css";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function MyApp({ Component, pageProps }) {
   return (
