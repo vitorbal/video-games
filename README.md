@@ -31,7 +31,7 @@ _or if I'd want this to be a production app_
 - Finish "by Genre" aggregation feature.
 - Improve styling and response behavior.
 - Fix layout shift when loading finishes.
-- Improve graph labels
+- Improve graph labels and hover behavior.
 - Maybe add a fun auto-generated conclusion like "Looks like X company won the browser wars for these years!"
 
 - Write tests for the data manipulation stuff.
