@@ -1,5 +1,5 @@
 import Head from "next/head";
-import GameSalesGraph from "../components/GameSalesGraph";
+import GameSales from "../components/GameSales";
 
 export default function Home() {
   return (
@@ -12,8 +12,8 @@ export default function Home() {
       <div className="flex flex-col items-center justify-center h-screen">
         <main>
           <h1 className="text-center text-5xl">Console Wars!</h1>
-          <div className="w-screen">
-            <GameSalesGraph />
+          <div className="w-screen flex flex-col items-center justify-center">
+            <GameSales />
           </div>
         </main>
 
