@@ -16,6 +16,8 @@ Then, start your local server with:
 yarn dev
 ```
 
+The app will be available on http://localhost:3000!
+
 ## Deployments
 
 This app is powered by Vercel. Opening a PR will automatically trigger a preview deployment, and merging to `main` will trigger a production deployment.
@@ -29,12 +31,15 @@ _or if I'd want this to be a production app_
 - Finish "by Genre" aggregation feature.
 - Improve styling and response behavior.
 - Fix layout shift when loading finishes.
+- Improve graph labels
+- Maybe add a fun auto-generated conclusion like "Looks like X company won the browser wars for these years!"
 
 - Write tests for the data manipulation stuff.
 - Look into performance improvements, especially in the data transformation logic.
 - Definitely invest into a11y.
 - generate supabase DB types with openapi-typescript.
 - Optimize bundle size, making sure e.g. lodash is being tree-shaken, etc.
+- Add CI/CD
 
 ## Design decisions
 
