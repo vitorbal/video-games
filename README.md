@@ -40,3 +40,4 @@ _or if I'd want this to be a production app_
 
 - I opted to expose the video game sales data via a Next API endpoint, in case I needed to massage the data. When deployed to Vercel I can get caching for free, which should help speed up the API calls.
 - I did some extra massaging to fit the chart library on the client-side, so the API endpoint remains agnostic of the chart library choice.
+- Data was imported and stored into Supabase, mostly because I wanted an excuse to play around with Supabase, but also so I didn't have to to parsing of a .csv file by hand.

@@ -107,9 +107,9 @@ export default function GameSales() {
             setStartYear(event.target.value);
           }}
         >
-          <option value="1990">90's</option>
-          <option value="2000">00's</option>
-          <option value="2010">10's</option>
+          <option value="1990">90&apos;s</option>
+          <option value="2000">00&apos;s</option>
+          <option value="2010">10&apos;s</option>
         </select>
       </label>
       <SalesChart startYear={startYear} />
