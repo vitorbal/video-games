@@ -68,6 +68,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const groupedByYear = groupBy(data, "Year_of_Release");
 
+  // Cache server-side for 1 hour
+  res.setHeader("Cache-Control", "s-maxage=3600, stale-while-revalidate");
+
   if (by === "genre") {
     return res.status(200).json(aggregateByGenre(groupedByYear));
   }
